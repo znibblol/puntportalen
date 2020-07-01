@@ -2,15 +2,16 @@
 ### Goin to rebuild puntportalen from the ground up.
 ---
 
-* [ ] Create server folder
-    * [ ] Init npm
-    * [ ] Add express morgan cors body-parser helmet?
-    * [ ] Create 'Hello World' route
+* [x] Create server folder
+    * [x] Init npm
+    * [x] Add express morgan cors body-parser helmet?
+    * [x] Add nodemon to dev-dependencies
+    * [x] Create 'Hello World' route
 ---
 * [ ] Create client folder
-    * [ ] Vue create clinet
-    * [ ] Add a simple bootstrap theme
-    * [ ] Create simple homepage layout
+    * [x] Vue create clinet
+    * [x] Add a simple bootstrap theme
+    * [x] Create simple homepage layout
 ---
 * [ ] Add DB to server
     * [ ] Add monk joi

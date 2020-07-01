@@ -1,0 +1,5 @@
+<template>
+  <div class="container about pt-3">
+    <h1>This is an about page</h1>
+  </div>
+</template>
