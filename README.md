@@ -8,7 +8,7 @@
     * [x] Add nodemon to dev-dependencies
     * [x] Create 'Hello World' route
 ---
-* [ ] Create client folder
+* [x] Create client folder
     * [x] Vue create clinet
     * [x] Add a simple bootstrap theme
     * [x] Create simple homepage layout
