@@ -14,7 +14,8 @@
     * [x] Create simple homepage layout
 ---
 * [ ] Add DB to server
-    * [ ] Add monk joi
+    * [ ] Add knex perk joi
+    * [ ] Create documents migration
     * [ ] Create documents model
         * [ ] Create route to POST document to db
             * [ ] Validate document with joi
