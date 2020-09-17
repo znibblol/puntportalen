@@ -18,6 +18,7 @@
     "joi": "^14.3.1",
     "knex": "^0.21.1",
     "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
     "perk": "^2.8.1"
   },
   "devDependencies": {
