@@ -1,5 +1,5 @@
 # PuntPortalen
-### Goin to rebuild puntportalen from the ground up.
+### Rebuilding puntportalen from the ground up.
 ---
 
 * [x] Create server folder
@@ -13,8 +13,8 @@
     * [x] Add a simple bootstrap theme
     * [x] Create simple homepage layout
 ---
-* [ ] Add DB to server
-    * [ ] Add knex perk joi
+* [x] Add DB to server
+    * [x] Add knex perk joi
     * [ ] Create documents migration
     * [ ] Create documents model
         * [ ] Create route to POST document to db
@@ -25,6 +25,7 @@
             * [ ] Respond with inserted document
         * [ ] Create route to DELETE document
         * [ ] Create route to GET documents
+    * [x] Create Beerbet migration and seeds
     * [ ] Create Beerbet model
         * [ ] Create route to POST beerbet to db
             * [ ] Validate beerbet with joi

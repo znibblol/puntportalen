@@ -4,7 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const betRouter = require('./routes/bet_routes');
-const knex = require('knex');
+const userRouter = require('./routes/user_routes');
 
 // init app
 const app = express();
@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(helmet());
 app.use('/api/beerbet', betRouter);
+app.use('/api/users', userRouter);
 
 // Create simple routes
 // app.get('/',  (req, res) => {
