@@ -91,7 +91,7 @@ router.get('/', function(req, res) {
                     });
                 }
             });
-            console.log(bets);
+            // console.log(bets);
             res.json(bets);
     });
 });
@@ -111,10 +111,56 @@ router.get('/:id', function(req, res) {
 });
 
 
-router.post('/', function(req, res) {
-    knex('bet_main').insert([{'description': req.body.description}, {'type_of': req.body.type}, {secret: req.body.secret}, {'author_id': req.body.author_id}, {'created_at': new Date()}, {'updated_at': new Date()}]);
-    req.body.takers.forEach(taker => knex('bet_bets').insert([{'bet_id': taker.bet_id}, {'user_id': taker.user_id}, {'paid': 0}, {'created_at': new Date()}, {'updated_at': new Date()}]));
+router.post('/', (req, res) => {
+    knex('bet_main')
+        .insert([{
+            'created_at': new Date(),
+            'updated_at': new Date(),
+            'description': req.body.description,
+            'author_id': req.body.author_id,
+            'secret': req.body.secret,
+            'type_of': req.body.type
+        }]).then((data) => {
+            req.body.takers.forEach(taker => {
+                knex('bet_bets')
+                    .insert({
+                        'bet_id': data[0],
+                        'user_id': taker.user_id,
+                        'paid': 0,
+                        'created_at': new Date(),
+                        'updated_at': new Date(),
+                    }).then(d => res = d);
+            });
+            res.json(data);
+        }).catch((error) => {
+            console.log(error);
+        });
 });
 
+
+
+// router.post('/', function(req, res) {
+//     knex('bet_main')
+//         .insert([
+//             {'created_at': new Date(),
+//             'updated_at': new Date(),
+//             'description': req.body.description, 
+//             'author_id': req.body.author_id, 
+//             'secret': req.body.secret, 
+//             'type_of': req.body.type},
+//         ]).then(function(res) {
+//             const betId = res[0];
+//             return betId;
+//         });
+//         req.body.takers.forEach(taker => 
+//             knex('bet_bets')
+//                 .insert([
+//                     {'bet_id': betId}, 
+//                     {'user_id': taker.user_id}, 
+//                     {'paid': 0}, 
+//                     {'created_at': new Date()}, 
+//                     {'updated_at': new Date()}
+//                 ])
+//             }));
 
 module.exports = router;

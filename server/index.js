@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const betRouter = require('./routes/bet_routes');
 const userRouter = require('./routes/user_routes');
+const { urlencoded } = require('body-parser');
 
 // init app
 const app = express();
@@ -12,6 +13,7 @@ const app = express();
 // add middleware
 app.use(morgan('common'));
 app.use(bodyParser.json());
+bodyParser.urlencoded({extended: true});
 app.use(cors());
 app.use(helmet());
 app.use('/api/beerbet', betRouter);
