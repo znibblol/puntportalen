@@ -35,7 +35,6 @@ const router = express.Router();
 //         //         }
 //         //     ]
 //         // });
-//         // console.log(bet);
 //         res.json(data);
 //     })
 // });
@@ -81,7 +80,6 @@ router.get('/', function(req, res) {
                     takers: []
                     }
                 }
-                // console.log(row.takers_id);
                 if(bets[row.main_id].author.author_id != row.takers_id) {
                     bets[row.main_id].takers.push({
                         id: row.takers_id,
@@ -91,9 +89,8 @@ router.get('/', function(req, res) {
                     });
                 }
             });
-            // console.log(bets);
             res.json(bets);
-    });
+    }).catch(error => console.log(error));
 });
 
 // router.get('/', function(req, res) {
@@ -112,29 +109,34 @@ router.get('/:id', function(req, res) {
 
 
 router.post('/', (req, res) => {
+    let bb = req.body.beerbet;
+    console.log(bb);
     knex('bet_main')
         .insert([{
             'created_at': new Date(),
             'updated_at': new Date(),
-            'description': req.body.description,
-            'author_id': req.body.author_id,
-            'secret': req.body.secret,
-            'type_of': req.body.type
+            'description': bb.description,
+            'author_id': bb.author_id,
+            'secret': 0,
+            'type_of': bb.type
         }]).then((data) => {
-            req.body.takers.forEach(taker => {
-                knex('bet_bets')
-                    .insert({
-                        'bet_id': data[0],
-                        'user_id': taker.user_id,
-                        'paid': 0,
-                        'created_at': new Date(),
-                        'updated_at': new Date(),
-                    }).then(d => res = d);
+            const newObj = bb.takers.map(taker => {
+                return {
+                    paid: 0,
+                    user_id: taker,
+                    bet_id: data,
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                }
             });
+                knex('bet_bets')
+                    .insert(newObj).then(d => res = d)
+                    .catch(error => console.log(error));
             res.json(data);
         }).catch((error) => {
             console.log(error);
         });
+        console.log(bb);
 });
 
 

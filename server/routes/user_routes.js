@@ -13,8 +13,7 @@ const router = express.Router();
 router.get('/', function(req, res) {
     knex.select('*').from('users').then(data => {
         res.json(data);
-        console.log(data);
-    });
+    }).catch(error => console.log(error));
 });
 
 

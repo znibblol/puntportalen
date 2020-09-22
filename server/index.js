@@ -11,7 +11,7 @@ const { urlencoded } = require('body-parser');
 const app = express();
 
 // add middleware
-app.use(morgan('common'));
+app.use(morgan('tiny'));
 app.use(bodyParser.json());
 bodyParser.urlencoded({extended: true});
 app.use(cors());

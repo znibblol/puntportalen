@@ -13,8 +13,6 @@ export default {
     Header,
   },
   mounted() {
-    this.$store.dispatch('getBeerbets');
-    this.$store.dispatch('getUsers');
   }
 }
 </script>
