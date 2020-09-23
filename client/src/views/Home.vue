@@ -4,7 +4,7 @@
         <span class="fa fa-th-large" @click="viewType = false" v-bind:class="{ active: !viewType }"></span>&nbsp;&nbsp;
         <span class="fa fa-list" @click="viewType = true" v-bind:class="{ active: viewType }"></span>
         <ul class="list-unstyled row" v-if="!viewType">
-            <div class="col-sm-6 col-md-4" v-for="beerbet in beerbets" :key="beerbet.id">
+            <div class="col-sm-6 col-md-3" v-for="beerbet in beerbets" :key="beerbet.id">
                 <li class="card">
                     <div class="card-header">
                         <h3>För: {{ beerbet.author.first_name }} <span class="float-right"
@@ -43,7 +43,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="add-bb-form card col-sm-3 py-3">
+        <div class="add-bb-form card col-sm-12 col-md-3 py-3">
             <h3>Lägg till vadslagning</h3>
             <form @submit.prevent="createBet()">
                 <div class="form-group">
@@ -123,6 +123,7 @@
                 bb.takers.push(this.create_author);
                 this.clearForm();
                 this.postBeerbet(bb);
+                this.$store.dispatch('getBeerbets');
             },
         },
         computed: {}

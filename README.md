@@ -2,6 +2,11 @@
 ### Rebuilding puntportalen from the ground up.
 ---
 
+### Todo:
+* [ ] Update Beerbets when a new beerbet has been posted
+* [ ] Why doesn't the beerbets automaticly load on pagereload?
+---
+
 * [x] Create server folder
     * [x] Init npm
     * [x] Add express morgan cors body-parser helmet?
