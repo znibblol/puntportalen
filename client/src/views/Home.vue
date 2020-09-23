@@ -5,8 +5,9 @@
         <span class="fa fa-list" @click="viewType = true" v-bind:class="{ active: viewType }"></span>
         <ul class="list-unstyled row" v-if="!viewType">
             <div class="col-sm-6 col-md-3" v-for="beerbet in beerbets" :key="beerbet.id">
-                <li class="card">
+                <li class="card" @dblclick="editBeerbet(beerbet)">
                     <div class="card-header">
+                        <input type="text" v-if="beerbet.editing" class="form-control">
                         <h3>För: {{ beerbet.author.first_name }} <span class="float-right"
                                 style="font-size:0.9rem;">id:({{ beerbet.id }})</span></h3>
                     </div>
@@ -16,11 +17,12 @@
                         <h5 v-if="!beerbet.type"><strong>Typ: &#x1f37a;</strong></h5>
                         <h5 v-else><strong>Typ: &#x1f96a;</strong></h5>
                         <h5><strong>Emot:</strong></h5>
-                        <ul class="list-unstyled">
+                        <ul class="list-unstyled taker_list" :id="beerbet.id">
                             <li v-for="taker in beerbet.takers" :key="taker.id" class="card-header">
-                                {{ taker.first_name }} <span class="float-right text-success"
-                                    v-if="taker.paid">Betald</span><span class="float-right text-warning" v-else>Ej
-                                    Betald</span></li>
+                                {{ taker.first_name }} 
+                                <span class="float-right text-success" v-if="taker.paid">Betald</span>
+                                <span class="float-right text-warning" v-else>Ej Betald</span>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -84,6 +86,13 @@
     import {mapActions} from 'vuex';
 
     export default {
+        chainWebpack: config => {
+            config.plugin('html').tap(args => {
+                return [
+                    args[0].title = 'Beerbets | Puntportalen.se'
+                ]
+            });
+        },
         name: 'Home',
         data: () => ({
             beerbets: [],
@@ -104,6 +113,10 @@
             ...mapActions([
                 'postBeerbet',
             ]),
+            editBeerbet(beerbet) {
+                console.log(beerbet);
+                beerbet.editing = true;
+            },
             clearForm() {
                 this.create_author = '';
                 this.create_description = '';
@@ -148,7 +161,7 @@
         background: #E0FF4F;
         color: #222;
         border-radius: 50px;
-        padding: 10px 30px;
+        padding: 0px 23px;
         transition: all 200ms;
         position: fixed;
         bottom: 20px;

@@ -1,13 +1,5 @@
 const express = require('express');
-const knex = require('knex')({
-    client: 'mysql',
-    connection: {
-        host: "127.0.0.1",
-        user: "root",
-        password: "hejsan123",
-        database: "puntportalen",
-    }
-});
+const knex = require('../db/db');
 const router = express.Router();
 
 router.get('/', function(req, res) {
@@ -77,20 +69,14 @@ router.post('/', (req, res) => {
     console.log(bb);
     knex('bet_main')
         .insert([{
-            'created_at': new Date(),
-            'updated_at': new Date(),
             'description': bb.description,
             'author_id': bb.author_id,
-            'secret': 0,
             'type_of': bb.type
         }]).then((data) => {
             const newObj = bb.takers.map(taker => {
                 return {
-                    paid: 0,
                     user_id: taker,
                     bet_id: data,
-                    created_at: new Date(),
-                    updated_at: new Date(),
                 }
             });
                 knex('bet_bets')
