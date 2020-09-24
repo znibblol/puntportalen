@@ -1,33 +1,32 @@
 <template>
     <div class="container home pt-3">
-        <h1>This is PuntPortalen</h1>
-        <span class="fa fa-th-large" @click="viewType = false" v-bind:class="{ active: !viewType }"></span>&nbsp;&nbsp;
-        <span class="fa fa-list" @click="viewType = true" v-bind:class="{ active: viewType }"></span>
-        <ul class="list-unstyled row" v-if="!viewType">
-            <div class="col-sm-6 col-md-3" v-for="beerbet in beerbets" :key="beerbet.id">
-                <li class="card" @dblclick="editBeerbet(beerbet)">
-                    <div class="card-header">
-                        <input type="text" v-if="beerbet.editing" class="form-control">
-                        <h3>För: {{ beerbet.author.first_name }} <span class="float-right"
-                                style="font-size:0.9rem;">id:({{ beerbet.id }})</span></h3>
-                    </div>
-                    <div class="card-body">
-                        <h4>{{ beerbet.description }}</h4>
-                        <br>
-                        <h5 v-if="!beerbet.type"><strong>Typ: &#x1f37a;</strong></h5>
-                        <h5 v-else><strong>Typ: &#x1f96a;</strong></h5>
-                        <h5><strong>Emot:</strong></h5>
-                        <ul class="list-unstyled taker_list" :id="beerbet.id">
-                            <li v-for="taker in beerbet.takers" :key="taker.id" class="card-header">
-                                {{ taker.first_name }} 
-                                <span class="float-right text-success" v-if="taker.paid">Betald</span>
-                                <span class="float-right text-warning" v-else>Ej Betald</span>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+        <div class="row mb-3">
+            <div class="col-sm-12">
+                <h1 style="display: inline-block;">Vadslagningar</h1>
+                <div class="pt-2 float-right">
+                    <span class="list-selector fa fa-th-large" @click="viewType = false" v-bind:class="{ active: !viewType }"></span>&nbsp;&nbsp;
+                    <span class="list-selector fa fa-list" @click="viewType = true" v-bind:class="{ active: viewType }"></span>
+                </div>
             </div>
-        </ul>
+        </div>
+        <div class="list-unstyled row" v-if="!viewType">
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3" v-for="beerbet in beerbets" :key="beerbet.id">
+                <div class="card p-3">
+                    <p v-if="!beerbet.type">&#x1f37a; Beerbet<span class="float-right text-muted">id:({{beerbet.id}})</span></p>
+                    <p v-else>&#x1f96a; Sandwich<span class="float-right text-muted">id:({{beerbet.id}})</span></p>
+                    <h5>{{ beerbet.description }}</h5>
+                    <h5 class="my-3">För: <span class="text-danger">{{ beerbet.author.first_name }}</span></h5>
+                    <ul class="list-unstyled">
+                        <h5>Emot:</h5>
+                        <li style="padding:7px 0;" v-for="taker in beerbet.takers" :key="taker.id">
+                            {{ taker.first_name }} 
+                            <span class="text-success float-right" v-if="taker.paid">Betald</span>
+                            <span class="text-warning float-right" v-else>Ej betald</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <table class="table table-striped" v-else>
             <thead>
                 <tr>
@@ -156,6 +155,18 @@
 </script>
 
 <style lang="scss">
+    .card {
+        border: none;
+        color: #e1e1e1;
+        text-shadow: none;
+        transition: all 200ms;
+        &:hover {
+            background: #393f46;
+        }
+    }
+    .card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
+        text-shadow: none;
+    }
     .col-sm-6 {
         padding: 15px;
     }
@@ -163,14 +174,24 @@
     .fa {
         font-size: 2em;
     }
-
+    .list-selector {
+        transition: all 200ms;
+        &:hover {
+            color: #79e679;
+            cursor: pointer;
+        }
+    }
     .active {
-        color: #E0FF4F;
+        color: #62c462;
+        &:hover {
+            color:#62c462;
+            cursor: not-allowed;
+        }
     }
 
     .add-btn {
         font-size: 3rem;
-        background: #E0FF4F;
+        background: #62c462;
         color: #222;
         border-radius: 50px;
         padding: 0px 23px;
@@ -198,7 +219,7 @@
     .add-btn:hover {
         text-decoration: none;
         color: #222;
-        background: #aac33b;
+        background: #79e679;
     }
 
 
