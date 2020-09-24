@@ -95,8 +95,6 @@
         },
         name: 'Home',
         data: () => ({
-            beerbets: [],
-            users: [],
             viewType: false,
             create_author: '',
             create_description: '',
@@ -104,8 +102,6 @@
             create_takers: [],
         }),
         mounted() {
-            this.$store.dispatch('getBeerbets');
-            this.$store.dispatch('getUsers');
             this.beerbets = this.$store.state.beerbets;
             this.users = this.$store.state.users;
         },
@@ -114,7 +110,6 @@
                 'postBeerbet',
             ]),
             editBeerbet(beerbet) {
-                console.log(beerbet);
                 beerbet.editing = true;
             },
             clearForm() {
@@ -134,12 +129,29 @@
                     takers: this.create_takers,
                 };
                 bb.takers.push(this.create_author);
-                this.clearForm();
-                this.postBeerbet(bb);
-                this.$store.dispatch('getBeerbets');
+                // this.clearForm();
+                const newObj = bb;
+                this.postBeerbet(newObj);
             },
         },
-        computed: {}
+        computed: {
+            beerbets: {
+                get: function() {
+                    return this.$store.state.beerbets;
+                },
+                set: function() {
+                    this.$store.dispatch('getBeerbets');
+                }
+            },
+            users: {
+                get: function() {
+                    return this.$store.state.users;
+                },
+                set: function() {
+                    this.$store.dispatch('getUsers');
+                }
+            }
+        }
     }
 </script>
 
