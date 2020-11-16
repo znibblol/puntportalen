@@ -95,8 +95,6 @@
         },
         name: 'Home',
         data: () => ({
-            beerbets: [],
-            users: [],
             viewType: false,
             create_author: '',
             create_description: '',
@@ -106,8 +104,6 @@
         mounted() {
             this.$store.dispatch('getBeerbets');
             this.$store.dispatch('getUsers');
-            this.beerbets = this.$store.state.beerbets;
-            this.users = this.$store.state.users;
         },
         methods: {
             ...mapActions([
@@ -139,7 +135,14 @@
                 this.$store.dispatch('getBeerbets');
             },
         },
-        computed: {}
+        computed: {
+            beerbets: function() {
+                return this.$store.state.beerbets;
+            },
+            users: function() {
+                return this.$store.state.users;
+            },
+        }
     }
 </script>
 
