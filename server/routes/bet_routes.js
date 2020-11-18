@@ -66,7 +66,7 @@ router.get('/:id', function(req, res) {
 
 router.post('/', (req, res) => {
     let bb = req.body.beerbet;
-    console.log(bb);
+    // console.log(bb);
     knex('bet_main')
         .insert([{
             'description': bb.description,
@@ -86,7 +86,7 @@ router.post('/', (req, res) => {
         }).catch((error) => {
             console.log(error);
         });
-        console.log(bb);
+        // console.log(bb);
 });
 
 module.exports = router;

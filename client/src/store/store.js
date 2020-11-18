@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
+import Api from './api';
 
 Vue.use(Vuex);
 
@@ -12,41 +12,25 @@ export const store = new Vuex.Store({
         users: [],
     },
     mutations: {
-        setBeerbets(state, payload) {
-            state.beerbets = payload;
+        setBeerbets(state, beerbets) {
+            state.beerbets = beerbets;
         },
-        setUsers(state, payload) {
-            state.users = payload;
-        },
-        updateBeerbets(state, payload) {
-            console.log('Detta är payloaden', payload);
-            console.log('Detta är state beerbets', state.beerbets);
-            state.beerbets.push(payload);
+        setUsers(state, users) {
+            state.users = users;
         }
     },
     actions: {
-        getBeerbets(state) {
-            fetch(API_URI + 'beerbet/').then(response => response.json()).then(result => {
-                state.commit('setBeerbets', result);
-            }).catch(error => {
-                console.error(error);
-            });
+        getBeerbets({commit}) {
+            Api().get('/beerbet').then(response => commit('setBeerbets', response.data)).catch(e => console.log(e));
         },
-        getUsers(state) {
-            fetch(API_URI + 'users/').then(response => response.json()).then(result => {
-                state.commit('setUsers', result);
-            }).catch(error => {
-                console.error(error);
-            });
+        getUsers({commit}) {
+            Api().get('/users').then(response => commit('setUsers', response.data)).catch(e => console.log(e));
         },
-        postBeerbet(state, beerbet) {
-            // console.log(beerbet);
-            axios.post(API_URI + 'beerbet/', {beerbet})
-                .then(result => {
-                    // console.log(JSON.parse(result.config.data).beerbet);
-                    state.commit('updateBeerbets', JSON.parse(result.config.data).beerbet);
-                })
-                .catch(error => console.error(error));
+        async postBeerbet(beerbet) {
+            Api().post('/beerbet', {beerbet}).then(res => {
+                console.log(res.data);
+                this.dispatch('getBeerbets')
+            }).catch(error => console.log(error));
         },
     },
     getter: {
@@ -54,4 +38,5 @@ export const store = new Vuex.Store({
     }
 });
 
-// module.exports = store;
+
+// CMC kommer skada sig och missa en match säsongen 20/21
