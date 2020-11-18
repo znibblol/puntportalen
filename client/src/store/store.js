@@ -19,8 +19,9 @@ export const store = new Vuex.Store({
             state.users = payload;
         },
         updateBeerbets(state, payload) {
-            state.beerbet.push(payload);
-            console.log('Detta är payloaden', payload.data);
+            console.log('Detta är payloaden', payload);
+            console.log('Detta är state beerbets', state.beerbets);
+            state.beerbets.push(payload);
         }
     },
     actions: {
@@ -39,11 +40,11 @@ export const store = new Vuex.Store({
             });
         },
         postBeerbet(state, beerbet) {
-            console.log(beerbet);
+            // console.log(beerbet);
             axios.post(API_URI + 'beerbet/', {beerbet})
                 .then(result => {
-                    console.log(result);
-                    state.commit('updateBeerbets', result);
+                    // console.log(JSON.parse(result.config.data).beerbet);
+                    state.commit('updateBeerbets', JSON.parse(result.config.data).beerbet);
                 })
                 .catch(error => console.error(error));
         },

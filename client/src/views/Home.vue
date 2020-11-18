@@ -9,7 +9,7 @@
                     <div class="card-header">
                         <input type="text" v-if="beerbet.editing" class="form-control">
                         <h3>För: {{ beerbet.author.first_name }} <span class="float-right"
-                                style="font-size:0.9rem;">id:({{ beerbet.id }})</span></h3>
+                                style="font-size:0.9rem;">id: {{ beerbet.id }}</span></h3>
                     </div>
                     <div class="card-body">
                         <h4>{{ beerbet.description }}</h4>
@@ -133,6 +133,7 @@
                 this.clearForm();
                 this.postBeerbet(bb);
                 this.$store.dispatch('getBeerbets');
+                this.showForm();
             },
         },
         computed: {

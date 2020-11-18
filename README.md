@@ -3,8 +3,7 @@
 ---
 
 ### Todo:
-* [ ] Update Beerbets when a new beerbet has been posted
-* [ ] Why doesn't the beerbets automaticly load on pagereload?
+* [ ] Update Beerbets when a new beerbet has been posted (wrong with the vuex mutations here)
 ---
 
 * [x] Create server folder
