@@ -17,11 +17,11 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/login">Logga in</router-link>
+                <li class="nav-item" v-if="this.$store.state.user.id">
+                    <router-link class="nav-link" to="/user">{{ this.$store.state.user.first_name }}  {{ this.$store.state.user.last_name }}</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="btn btn-login" to="/register">Registrera</router-link>
+                    <router-link class="nav-link" to="/login">{{ authText }}</router-link>
                 </li>
             </ul>
           </div>
@@ -32,6 +32,11 @@
 <script>
 export default {
     name: 'Header',
+    computed: {
+        authText: function() {
+            return this.$store.state.user.id ? 'Logga ut' : 'Logga in';
+        },
+    }
 }
 </script>
 

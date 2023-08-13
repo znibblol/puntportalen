@@ -19,7 +19,7 @@
                     <ul class="list-unstyled">
                         <h5>Emot:</h5>
                         <li style="padding:7px 0;" v-for="taker in beerbet.takers" :key="taker.id">
-                            {{ taker.first_name }} 
+                            {{ taker.first_name }}
                             <span class="text-success float-right" v-if="taker.paid">Betald</span>
                             <span class="text-warning float-right" v-else>Ej betald</span>
                         </li>
@@ -50,6 +50,7 @@
                 <div class="form-group">
                     <label for="author">Skapare</label>
                     <select v-model="create_author" class="form-control">
+                        <option value="undefined" selected>Välj</option>
                         <option v-for="user in users" :key="user.id" :value="user.id" class="form-control">{{ user.first_name }}</option>
                     </select>
                 </div>
@@ -95,7 +96,7 @@
         name: 'Home',
         data: () => ({
             viewType: false,
-            create_author: '',
+            create_author: this.$store.state.user.id,
             create_description: '',
             create_sandwich: false,
             create_takers: [],

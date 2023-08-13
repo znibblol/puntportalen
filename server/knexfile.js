@@ -1,13 +1,21 @@
+require('dotenv').config({ path: '.env' });
+
 // Update with your config settings.
-
 module.exports = {
-
   development: {
     client: 'mysql',
     connection: {
-      database: 'puntportalen',
-      user: 'root',
-      password: 'hejsan123'
+      host: process.env.DB_HOST,
+      database: process.env.DB_DATABASE,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD
+    },
+    pool: {
+      min: 0,
+      max: 10
+    },
+    migrations: {
+      table_name: 'knex_migrations'
     }
   },
 
