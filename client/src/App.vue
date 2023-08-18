@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -12,17 +12,15 @@ export default {
   components: {
     Header,
   },
-  mounted() {
-  }
-}
+  mounted() {},
+};
 </script>
 
-<style lang="scss">
-  body {
-    background: #282c34;
-  }
-  .bg-dark {
-    background: #282c34 !important;
-  }
-
+<style>
+body {
+  background: #282c34;
+}
+.bg-dark {
+  background: #282c34 !important;
+}
 </style>
