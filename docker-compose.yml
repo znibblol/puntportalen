@@ -22,6 +22,19 @@ services:
         ports:
             - "8082:2000"
 
+    database:
+        image: mariadb 
+        restart: always
+        container_name: pp_db
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: puntportalen
+            MYSQL_USER: root
+        networks:
+            - backend
+        ports:
+            - "3306:3306"
+
 networks:
     frontend:
     backend:
