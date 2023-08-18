@@ -25,8 +25,8 @@
               >Hem <span class="sr-only">(current)</span></router-link
             >
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/about">Om</router-link>
+          <li class="nav-item" v-if="$store.state.user.id">
+            <router-link class="nav-link" to="/beerbets">Beerbets</router-link>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
