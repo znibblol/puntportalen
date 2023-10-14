@@ -63,34 +63,34 @@ export default {
   border: 0;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 }
-.navbar-dark > .navbar-brand {
+.navbar-dark .navbar-brand {
   border: none;
 }
-.navbar-dark > .brand-logo {
+.navbar-dark .brand-logo {
   width: 55px;
 }
-.navbar-dark > .nav-item > .nav-link {
+.navbar-dark .nav-item .nav-link {
   border: none;
   transition: all 200ms;
   color: #fff;
 }
-.navbar-dark > .nav-item > .nav-link:hover {
+.navbar-dark .nav-item .nav-link:hover {
   background: transparent;
   border: none;
   opacity: 0.7;
 }
 
-.navbar-dark > .nav-item > .btn {
+.navbar-dark .nav-item .btn {
   margin-top: 6px;
   padding: 0.5rem 1rem;
   transition: all 200ms;
 }
-.navbar-dark > .nav-item > .btn-login {
+.navbar-dark .nav-item .btn-login {
   background: transparent;
   color: #fff;
   border-color: #fff;
 }
-.navbar-dark > .nav-item > .btn-login:hover {
+.navbar-dark .nav-item .btn-login:hover {
   opacity: 0.7;
 }
 </style>

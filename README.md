@@ -9,6 +9,7 @@
 1. In server, make a copy of .env.example and rename it to .env
 2. run docker-compose up --build
 3. run docker exec pp_server npm run migrate
+4. run docker exec pp_server knex seed:run
 
 You are up and running...
 
