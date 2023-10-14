@@ -1,3 +1,7 @@
+<script setup>
+  import Header from "./components/Header.vue";
+</script>
+
 <template>
   <div id="app">
     <Header />
@@ -6,21 +10,18 @@
 </template>
 
 <script>
-import Header from "../src/components/layout/Header";
-
-export default {
-  components: {
-    Header,
-  },
-  mounted() {},
-};
+  export default {
+    components:  {
+      Header,
+    },
+  }
 </script>
 
-<style>
-body {
-  background: #282c34;
-}
-.bg-dark {
-  background: #282c34 !important;
-}
+<style scoped>
+  body {
+    background: #282c34;
+  }
+  .bg-dark {
+    background: #282c34 !important;
+  }
 </style>
