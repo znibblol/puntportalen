@@ -21,6 +21,9 @@ export const useUser = defineStore('user-store', {
         },
         fullName(state) {
             return state.user.first_name + ' ' + this.user.last_name;
+        },
+        userData(state) {
+            return state.user;
         }
     },
 
@@ -38,9 +41,6 @@ export const useUser = defineStore('user-store', {
         },
         async postLogin(userCredentials) {
             const response = await axios.post(baseUrl + '/login', userCredentials);
-
-            console.log(response);
-
             try {
                 const result = response.data;
                 if(result.success) {
@@ -49,6 +49,7 @@ export const useUser = defineStore('user-store', {
                     this.user.refresh = result.refresh;
 
                     localStorage.setItem("user", result.token);
+                    localStorage.setItem("refresh", result.refresh);
 
                     router.push({path: '/beerbets'});
                 }
@@ -58,15 +59,8 @@ export const useUser = defineStore('user-store', {
             }
         },
         async postLogout() {
-            // const response = await axios.get(baseUrl + '/logout');
-            try {
-                // const result = response.data;
-                this.user = {};
-                localStorage.removeItem('user');
-            } catch(error) {
-                console.error('Error logging out: ', error);
-                return error;
-            }
+            this.user = {};
+            localStorage.removeItem('user');
         },
         async checkLocalStorage() {
             const token = await localStorage.getItem('user');

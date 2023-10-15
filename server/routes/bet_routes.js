@@ -14,16 +14,18 @@ router.get('/', function(req, res) {
             author.id AS author_id,
             author.first_name AS author_first_name,
             author.last_name AS author_last_name,
+            author.team_name AS author_team_name,
 
             takers.id AS takers_id,
             takers.first_name AS takers_first_name,
             takers.last_name AS takers_last_name,
+            takers.team_name AS takers_team_name,
             bet.paid AS takers_paid
             
         FROM bet_main AS main
-            LEFT JOIN bet_bets AS bet ON bet.bet_id=main.id
+            JOIN bet_bets AS bet ON bet.bet_id=main.id
             JOIN users AS author ON main.author_id=author.id
-            LEFT JOIN users AS takers ON bet.user_id=takers.id
+            JOIN users AS takers ON bet.user_id=takers.id
 
         `).then((data) => {
             let bets = {};
@@ -38,6 +40,7 @@ router.get('/', function(req, res) {
                         author_id: row.author_id,
                         first_name: row.author_first_name,
                         last_name: row.author_last_name,
+                        team_name: row.author_team_name,
                         paid: row.takers_paid,
                     },
                     takers: []
@@ -48,6 +51,7 @@ router.get('/', function(req, res) {
                         id: row.takers_id,
                         first_name: row.takers_first_name,
                         last_name: row.takers_last_name,
+                        team_name: row.takers_team_name,
                         paid: row.takers_paid
                     });
                 }

@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Beerbets from '../views/Beerbets.vue'
 import CreateBeerbet from '../views/CreateBeerbet.vue'
+import User from '../views/User.vue'
 
 const routes = [
     {
@@ -25,6 +26,11 @@ const routes = [
       path: '/create-beerbet',
       name: 'CreateBeerbet',
       component: CreateBeerbet
+    },
+    {
+      path: '/user',
+      name: 'User',
+      component: User
     },
 ];
 

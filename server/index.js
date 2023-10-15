@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const betRouter = require('./routes/bet_routes');
 const userRouter = require('./routes/user_routes');
-const { urlencoded } = require('body-parser');
+// const { urlencoded } = require('body-parser');
 
 // init app
 const app = express();
@@ -18,14 +18,6 @@ app.use(cors());
 app.use(helmet());
 app.use('/api/beerbet', betRouter);
 app.use('/auth', userRouter);
-
-// Create simple routes
-// app.get('/',  (req, res) => {
-//     res.json({
-//         msg: 'Hello World!'
-//     });
-//     console.log('Hello World!');
-// });
 
 // Start app
 const PORT = process.env.PORT ||2000;
