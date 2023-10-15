@@ -28,14 +28,11 @@
             <li class="nav-item" v-if="user_id">
               <router-link class="nav-link" to="/beerbets">Beerbets</router-link>
             </li>
-            <li class="nav-item" >
-              <router-link class="nav-link" to="/beerbets">Beerbets</router-link>
-            </li>
           </ul>
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item" v-if="this.user_id">
+            <li class="nav-item" v-if="user_id">
               <router-link class="nav-link" to="/user"
-                >{{ this.full_name }}</router-link
+                >{{ full_name }}</router-link
               >
             </li>
             <li class="nav-item">

@@ -2,7 +2,9 @@ import { defineStore } from "pinia";
 import Api from './api';
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:8082/api';
+import router from '../router';
+
+const baseUrl = 'http://localhost:8082/auth';
 
 export const useUser = defineStore('user-store', {
     state: () => {
@@ -14,10 +16,10 @@ export const useUser = defineStore('user-store', {
 
     getters: {
         userId(state) {
-            return this.user.id ?? false;
+            return state.user.id ?? false;
         },
         fullName(state) {
-            return this.user.first_name + ' ' + this.user.last_name;
+            return state.user.first_name + ' ' + this.user.last_name;
         }
     },
 
@@ -34,20 +36,15 @@ export const useUser = defineStore('user-store', {
             }
         },
         async postLogin(userCredentials) {
-            const response = await axios.post(baseUrl + '/users/login', userCredentials);
+            const response = await axios.post(baseUrl + '/login', userCredentials);
+
+            console.log(response);
 
             try {
                 const result = response.data;
                 if(result.success) {
                     this.user = result.user;
-
-                    let d = new Date();
-                    d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
-                    let expires = "expires=" + d.toUTCString();
-                    document.cookie =
-                    "Token=" + response.data.token + ";" + expires + ";path=/";
-
-                    // router.push('/beerbets');
+                    router.push({path: '/beerbets'});
                 }
             } catch(error) {
                 console.error('Error logging in: ', error);
@@ -55,7 +52,7 @@ export const useUser = defineStore('user-store', {
             }
         },
         async postLogout() {
-            const response = await axios.get(baseUrl + '/users/logout');
+            const response = await axios.get(baseUrl + '/logout');
             try {
                 const result = response.data;
                 this.user = {};
