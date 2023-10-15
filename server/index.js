@@ -17,7 +17,7 @@ bodyParser.urlencoded({extended: true});
 app.use(cors());
 app.use(helmet());
 app.use('/api/beerbet', betRouter);
-app.use('/api/users', userRouter);
+app.use('/auth', userRouter);
 
 // Create simple routes
 // app.get('/',  (req, res) => {

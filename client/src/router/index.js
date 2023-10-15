@@ -1,4 +1,4 @@
-import { createRouter } from "vue-router";
+import { createWebHistory, createRouter } from "vue-router";
 
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
@@ -29,15 +29,19 @@ const routes = [
 ];
 
 const router = createRouter({
-    history,
-    routes
+    history: createWebHistory(),
+    routes,
 });
 
 
+// module.exports = router;
 
-export default function(history) {
-    return createRouter({
-        history,
-        routes
-    });
-}
+export default router;
+
+
+// export default function(history) {
+//     return createRouter({
+//         history,
+//         routes
+//     });
+// }
