@@ -1,6 +1,6 @@
 const express = require('express');
-const { login, me, users } = require('../app/controllers/users.js');
-const { decodeHeader } = require('../app/middlewares/verifyAuth.js');
+const { login, me, users } = require('../controllers/users.js');
+const { decodeHeader } = require('../middlewares/verifyAuth.js');
 
 const router = express.Router();
 
