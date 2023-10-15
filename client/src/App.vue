@@ -10,10 +10,19 @@
 </template>
 
 <script>
+  import {  mapActions } from 'pinia';
+  import { useUser } from "./stores/user";
+
   export default {
     components:  {
       Header,
     },
+    created() {
+      this.checkLocalStorage();
+    },
+    methods: {
+      ...mapActions(useUser, ["checkLocalStorage"]),
+    }
   }
 </script>
 

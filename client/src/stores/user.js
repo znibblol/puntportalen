@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import Api from './api';
 import axios from 'axios';
+import VueJwtDecode from 'vue-jwt-decode';
 
 import router from '../router';
 
@@ -57,13 +58,24 @@ export const useUser = defineStore('user-store', {
             }
         },
         async postLogout() {
-            const response = await axios.get(baseUrl + '/logout');
+            // const response = await axios.get(baseUrl + '/logout');
             try {
-                const result = response.data;
+                // const result = response.data;
                 this.user = {};
+                localStorage.removeItem('user');
             } catch(error) {
                 console.error('Error logging out: ', error);
                 return error;
+            }
+        },
+        async checkLocalStorage() {
+            const token = await localStorage.getItem('user');
+            try {
+                const data = await VueJwtDecode.decode(token);
+                this.user = data;
+            } catch(error) {
+                console.error('Error fetching local token: ', error);
+                router.push('/login');
             }
         }
     }
