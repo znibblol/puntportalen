@@ -1,5 +1,5 @@
 const express = require('express');
-const knex = require('../db/db');
+const knex = require('../../db/db');
 const router = express.Router();
 
 router.get('/', function(req, res) {

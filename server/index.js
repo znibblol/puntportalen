@@ -3,8 +3,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-const betRouter = require('./routes/bet_routes');
-const userRouter = require('./routes/user_routes');
+const betRouter = require('./app/routes/bet_routes');
+const userRouter = require('./app/routes/user_routes');
 // const { urlencoded } = require('body-parser');
 
 // init app
