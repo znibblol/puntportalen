@@ -1,4 +1,6 @@
 const { getAllUsers, loginUser } = require('../models/user');
+const moment = require('moment');
+const Utils = require('../helpers/utils');
 
 const login = async(req, res) => {
     const { email, password } = req.body;
@@ -12,10 +14,17 @@ const login = async(req, res) => {
 
     const result = await loginUser(email, password);
     if(result) {
-        // Implement JWT here...
+
+		const token = Utils.generateJWT(result)
+		const refreshExpiry = moment().utc().add(3, 'days').endOf('day')
+			.format('X')
+		const refreshtoken = Utils.generateJWT({ exp: parseInt(refreshExpiry), data: result.id })
+
         return res.status(201).json({
             success: true,
-            user: result
+            user: result,
+            token: token,
+            refresh: refreshtoken
         });
     }
     

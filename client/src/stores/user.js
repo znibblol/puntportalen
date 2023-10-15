@@ -44,6 +44,11 @@ export const useUser = defineStore('user-store', {
                 const result = response.data;
                 if(result.success) {
                     this.user = result.user;
+                    this.user.token = result.token;
+                    this.user.refresh = result.refresh;
+
+                    localStorage.setItem("user", result.token);
+
                     router.push({path: '/beerbets'});
                 }
             } catch(error) {
