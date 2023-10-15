@@ -16,9 +16,9 @@ services:
                 MYSQL_USER: root
 
     frontend:
-        build: ./client
+        build: ./server/client
         volumes:
-            - ./client/:/app
+            - ./server/client/:/app
             - /app/node_modules
         container_name: pp_client
         networks:

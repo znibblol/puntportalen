@@ -27,18 +27,18 @@
           <div class="card p-3">
             <p v-if="!beerbet.type">
               &#x1f37a; Beerbet<span class="float-right text-muted"
-                >id:({{ beerbet.id }})</span
+                >{{ beerbet.id }}</span
               >
             </p>
             <p v-else>
               &#x1f96a; Sandwich<span class="float-right text-muted"
-                >id:({{ beerbet.id }})</span
+                >{{ beerbet.id }}</span
               >
             </p>
             <h5>{{ beerbet.description }}</h5>
             <h5 class="my-3">
               För:
-              <span class="text-danger">{{ beerbet.author.first_name }}</span>
+              <span class="text-danger">{{ beerbet.author.team_name }}</span>
             </h5>
             <ul class="list-unstyled">
               <h5>Emot:</h5>
@@ -47,7 +47,7 @@
                 v-for="taker in beerbet.takers"
                 :key="taker.id"
               >
-                {{ taker.first_name }}
+                {{ taker.team_name }}
                 <span class="text-success float-right" v-if="taker.paid"
                   >Betald</span
                 >

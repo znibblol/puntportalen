@@ -4,12 +4,16 @@
 
 ---
 
-### How to install.
+### How to install and run.
 
 1. In server, make a copy of .env.example and rename it to .env
-2. run docker-compose up --build
-3. run docker exec pp_server npm run migrate
-4. run docker exec pp_server knex seed:run
+2. ```$ openssl genrsa 2048 > private.key``` (Public and private keys are used for JWT)
+3. ```$ openssl rsa -in private.key -out public.key -pubout```
+<br> In the root folder
+4. ```$ docker-compose up``` (Add flag -d for running docker in the background)
+5. ```$ docker exec pp_server npm run migrate``` (Migrating the database)
+6. ```$ docker exec pp_server knex seed:run``` (Seeding the database with sampla data) // Should probably make a run script for this
+
 
 You are up and running...
 

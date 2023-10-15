@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import Api from './api';
 import axios from 'axios';
+import VueJwtDecode from 'vue-jwt-decode';
 
 import router from '../router';
 
@@ -20,6 +21,9 @@ export const useUser = defineStore('user-store', {
         },
         fullName(state) {
             return state.user.first_name + ' ' + this.user.last_name;
+        },
+        userData(state) {
+            return state.user;
         }
     },
 
@@ -37,13 +41,16 @@ export const useUser = defineStore('user-store', {
         },
         async postLogin(userCredentials) {
             const response = await axios.post(baseUrl + '/login', userCredentials);
-
-            console.log(response);
-
             try {
                 const result = response.data;
                 if(result.success) {
                     this.user = result.user;
+                    this.user.token = result.token;
+                    this.user.refresh = result.refresh;
+
+                    localStorage.setItem("user", result.token);
+                    localStorage.setItem("refresh", result.refresh);
+
                     router.push({path: '/beerbets'});
                 }
             } catch(error) {
@@ -52,13 +59,17 @@ export const useUser = defineStore('user-store', {
             }
         },
         async postLogout() {
-            const response = await axios.get(baseUrl + '/logout');
+            this.user = {};
+            localStorage.removeItem('user');
+        },
+        async checkLocalStorage() {
+            const token = await localStorage.getItem('user');
             try {
-                const result = response.data;
-                this.user = {};
+                const data = await VueJwtDecode.decode(token);
+                this.user = data;
             } catch(error) {
-                console.error('Error logging out: ', error);
-                return error;
+                console.error('Error fetching local token: ', error);
+                router.push('/login');
             }
         }
     }
