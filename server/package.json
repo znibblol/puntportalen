@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon index",
-    "migrate": "./migrate.sh"
+    "migrate": "./migrate.sh",
+    "seed": "knex seed:run"
   },
   "keywords": [],
   "author": "",
