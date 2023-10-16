@@ -20,5 +20,8 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["prettier"],
-  rules: {},
+  rules: {
+    "import/no-unresolved": 0,
+    "radix": 0,
+  },
 };
