@@ -1,5 +1,3 @@
-const decodeHeader = () => {
-    return true;
-}
+const decodeHeader = () => true;
 
 module.exports = decodeHeader;

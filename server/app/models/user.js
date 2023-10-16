@@ -1,42 +1,54 @@
-const knex = require('../../db/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
+const knex = require("../../db/db");
 
 // const saltRounds = 10;
 
-
 // Klar....
-const getAllUsers = async() => {
-    const users = await knex.select('email', 'first_name', 'last_name', 'residence', 'logo', 'team_name').from('users');
-    return users;
-}
+const getAllUsers = async () => {
+  const users = await knex
+    .select(
+      "email",
+      "first_name",
+      "last_name",
+      "residence",
+      "logo",
+      "team_name",
+    )
+    .from("users");
+  return users;
+};
 
-const loginUser = async(email, password) => {
+const loginUser = async (email, password) => {
   // bcrypt.hash('carlos', saltRounds, function (err, hash) {
   //   console.log(hash);
   // })
-    const dbhash = await knex.select('hash').from('users').where('email', email);
-    const compare = await new Promise((resolve, reject) => {
-        bcrypt.compare(password, dbhash[0].hash).then(async result => {
-            if(result === true) {
-                const user = await knex.select('id', 'email', 'first_name', 'last_name', 'residence', 'logo', 'team_name').from('users').where('email', email);
-                resolve(user[0]);
-            }
-            reject('Error fetching user.....')
-        });
+  const dbhash = await knex.select("hash").from("users").where("email", email);
+  const compare = await new Promise((resolve) => {
+    bcrypt.compare(password, dbhash[0].hash).then(async (result) => {
+      if (result === true) {
+        const user = await knex
+          .select(
+            "id",
+            "email",
+            "first_name",
+            "last_name",
+            "residence",
+            "logo",
+            "team_name",
+          )
+          .from("users")
+          .where("email", email);
+        resolve(user[0]);
+      }
     });
-    return compare;
-}
+  });
+  return compare;
+};
 
-const getMyUser = (id) => {
-    return id;
-}
+const getMyUser = (id) => id;
 
-module.exports = {getAllUsers, loginUser, getMyUser};
+module.exports = { getAllUsers, loginUser, getMyUser };
 // export default {getAllUsers, loginUser, getMyUser};
-
-
-
-
 
 // const knex = require('../db/db');
 // const router = express.Router();
@@ -50,8 +62,6 @@ module.exports = {getAllUsers, loginUser, getMyUser};
 //     res.json(data);
 //   }).catch(error => console.log(error));
 // });
-
-
 
 // router.get('/:id', function (req, res) {
 //   knex('bet_main').join('bet_bets', 'bet_main.id', '=', 'bet_bets.bet_id').join('users', 'bet_bets.user_id', '=', 'users.id').select('users.first_name', 'users.last_name', 'bet_bets.user_id', 'bet_bets.paid', 'bet_main.*').where('bet_main.id', req.params.id).then(data => {
