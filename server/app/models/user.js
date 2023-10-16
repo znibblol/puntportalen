@@ -23,7 +23,7 @@ const loginUser = async (email, password) => {
   //   console.log(hash);
   // })
   const dbhash = await knex.select("hash").from("users").where("email", email);
-  const compare = await new Promise((resolve, reject) => {
+  const compare = await new Promise((resolve) => {
     bcrypt.compare(password, dbhash[0].hash).then(async (result) => {
       if (result === true) {
         const user = await knex
@@ -40,7 +40,6 @@ const loginUser = async (email, password) => {
           .where("email", email);
         resolve(user[0]);
       }
-      reject("Error fetching user.....");
     });
   });
   return compare;

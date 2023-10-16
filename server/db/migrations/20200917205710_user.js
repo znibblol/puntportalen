@@ -1,4 +1,4 @@
-exports.up = function (knex, Promise) {
+exports.up = function userMigrationUp(knex) {
   return knex.schema.createTable("users", (t) => {
     t.increments("id").unsigned().primary();
     t.dateTime("created_at").notNull();
@@ -14,6 +14,6 @@ exports.up = function (knex, Promise) {
   });
 };
 
-exports.down = function (knex) {
+exports.down = function userMigrationDown(knex) {
   return knex.schema.dropTable("users");
 };

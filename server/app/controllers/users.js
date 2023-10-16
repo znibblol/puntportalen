@@ -5,7 +5,7 @@ const Utils = require("../helpers/utils");
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  if (email == "" || password == "") {
+  if (email === "" || password === "") {
     return res.status(400).json({
       success: false,
       message: "Se till att fylla i epost och lösenord",
@@ -41,7 +41,7 @@ const login = async (req, res) => {
 
 const users = async (req, res) => {
   const response = await getAllUsers();
-  if (response != []) {
+  if (response) {
     return res.status(200).json({
       success: true,
       users: response,
@@ -54,13 +54,13 @@ const users = async (req, res) => {
   });
 };
 
-const me = async (req, res) => {
-  const response = await getMyUser(req.body.id);
-  return res.status(200).json({
-    success: true,
-    user: response.data.user,
-  });
-};
+// const me = async (req, res) => {
+//   const response = await getMyUser(req.body.id);
+//   return res.status(200).json({
+//     success: true,
+//     user: response.data.user,
+//   });
+// };
 
-module.exports = { login, users, me };
+module.exports = { login, users };
 // export default {};

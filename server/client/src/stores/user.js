@@ -1,13 +1,12 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import VueJwtDecode from "vue-jwt-decode";
-import Api from "./api";
 
 import router from "../router";
 
 const baseUrl = "http://localhost:8082/auth";
 
-export const useUser = defineStore("user-store", {
+const useUser = defineStore("user-store", {
   state: () => ({
     users: [],
     user: {},
@@ -31,9 +30,9 @@ export const useUser = defineStore("user-store", {
       try {
         const result = response.data;
         this.users = result;
+        return true;
       } catch (error) {
         this.users = [];
-        console.error("Error loading users: ", error);
         return error;
       }
     },
@@ -49,26 +48,28 @@ export const useUser = defineStore("user-store", {
           localStorage.setItem("user", result.token);
           localStorage.setItem("refresh", result.refresh);
 
-          router.push({ path: "/beerbets" });
+          return router.push({ path: "/beerbets" });
         }
+        return true;
       } catch (error) {
-        console.error("Error logging in: ", error);
         return error;
       }
     },
-    async postLogout() {
+    postLogout() {
       this.user = {};
-      localStorage.removeItem("user");
+      return localStorage.removeItem("user");
     },
     async checkLocalStorage() {
       const token = await localStorage.getItem("user");
       try {
         const data = await VueJwtDecode.decode(token);
         this.user = data;
+        return true;
       } catch (error) {
-        console.error("Error fetching local token: ", error);
-        router.push("/login");
+        return router.push("/login");
       }
     },
   },
 });
+
+export default useUser;

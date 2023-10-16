@@ -39,13 +39,4 @@ const router = createRouter({
   routes,
 });
 
-// module.exports = router;
-
 export default router;
-
-// export default function(history) {
-//     return createRouter({
-//         history,
-//         routes
-//     });
-// }

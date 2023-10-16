@@ -1,4 +1,4 @@
-const bet_main = [
+const betMain = [
   {
     id: 1,
     created_at: new Date(),
@@ -40,4 +40,4 @@ const bet_main = [
   },
 ];
 
-module.exports = bet_main;
+module.exports = betMain;

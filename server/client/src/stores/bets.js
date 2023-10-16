@@ -1,10 +1,9 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import Api from "./api";
 
 const baseUrl = "http://localhost:8082/api";
 
-export const useBets = defineStore("beerbet-store", {
+const useBets = defineStore("beerbet-store", {
   state: () => ({
     beerbets: [],
   }),
@@ -21,24 +20,26 @@ export const useBets = defineStore("beerbet-store", {
       try {
         const result = response.data;
         this.beerbets = result;
+        return true;
       } catch (error) {
         this.beerbets = [];
-        console.error("Error loading beerbets: ", error);
         return error;
       }
     },
     async postBeerbet(beerbet) {
-      const response = await Api.post("/beerbet", { beerbet });
+      const response = await axios.post("/beerbet", { beerbet });
       try {
         const result = response.data;
         if (result.success) {
-          this.getBeerbets();
-        } else {
+          return this.getBeerbets();
         }
+        return true;
+        
       } catch (error) {
-        console.error("Error adding beerbet: ", error);
         return error;
       }
     },
   },
 });
+
+export default useBets;

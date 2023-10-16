@@ -51,7 +51,7 @@ router.get("/", (req, res) => {
             takers: [],
           };
         }
-        if (bets[row.main_id].author.author_id != row.takers_id) {
+        if (bets[row.main_id].author.author_id !== row.takers_id) {
           bets[row.main_id].takers.push({
             id: row.takers_id,
             first_name: row.takers_first_name,
@@ -63,7 +63,7 @@ router.get("/", (req, res) => {
       });
       res.json(bets);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => error);
 });
 
 router.get("/:id", (req, res) => {
@@ -85,7 +85,6 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   const bb = req.body.beerbet;
-  // console.log(bb);
   knex("bet_main")
     .insert([
       {
@@ -101,14 +100,10 @@ router.post("/", (req, res) => {
       }));
       knex("bet_bets")
         .insert(newObj)
-        .then((d) => (res = d))
-        .catch((error) => console.log(error));
-      res.json(data);
+        .catch((error) => error);
+      res.status(201).json(data);
     })
-    .catch((error) => {
-      console.log(error);
-    });
-  // console.log(bb);
+    .catch((error) => error);
 });
 
 module.exports = router;

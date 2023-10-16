@@ -21,4 +21,4 @@ app.use("/auth", userRouter);
 
 // Start app
 const PORT = process.env.PORT || 2000;
-app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+app.listen(PORT);
