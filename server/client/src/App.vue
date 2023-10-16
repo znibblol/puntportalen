@@ -1,5 +1,5 @@
 <script setup>
-  import Header from "./components/Header.vue";
+import Header from "./components/Header.vue";
 </script>
 
 <template>
@@ -10,27 +10,27 @@
 </template>
 
 <script>
-  import {  mapActions } from 'pinia';
-  import { useUser } from "./stores/user";
+import { mapActions } from "pinia";
+import { useUser } from "./stores/user";
 
-  export default {
-    components:  {
-      Header,
-    },
-    created() {
-      this.checkLocalStorage();
-    },
-    methods: {
-      ...mapActions(useUser, ["checkLocalStorage"]),
-    }
-  }
+export default {
+  components: {
+    Header,
+  },
+  created() {
+    this.checkLocalStorage();
+  },
+  methods: {
+    ...mapActions(useUser, ["checkLocalStorage"]),
+  },
+};
 </script>
 
 <style scoped>
-  body {
-    background: #282c34;
-  }
-  .bg-dark {
-    background: #282c34 !important;
-  }
+body {
+  background: #282c34;
+}
+.bg-dark {
+  background: #282c34 !important;
+}
 </style>
