@@ -22,7 +22,7 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { useUser } from "../stores/user";
+import useUser from "../stores/user";
 
 export default {
   name: "Login",

@@ -84,7 +84,7 @@
 // @ is an alias to /src
 
 import { mapState, mapActions } from "pinia";
-import { useBets } from "../stores/bets";
+import useBets from "../stores/bets";
 
 export default {
   name: "Home",

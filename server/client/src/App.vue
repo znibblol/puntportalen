@@ -11,7 +11,7 @@ import Header from "./components/Header.vue";
 
 <script>
 import { mapActions } from "pinia";
-import { useUser } from "./stores/user";
+import useUser from "./stores/user";
 
 export default {
   components: {

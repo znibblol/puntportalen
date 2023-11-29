@@ -48,7 +48,7 @@
 
 <script>
 import { mapState, mapActions } from "pinia";
-import { useUser } from "../stores/user";
+import useUser from "../stores/user";
 
 export default {
   name: "Header",
