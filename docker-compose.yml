@@ -37,6 +37,8 @@ services:
             - backend
         ports:
             - "8082:2000"
+        depends_on:
+            - database
 
 networks:
     frontend:
